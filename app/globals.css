@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Colours */
+  --color-brown-100: #441e1a;
+  --color-brown-200: #2f0601;
+  --color-yellow-10: #fffdf4;
+  --color-yellow-20: #fff8d3;
+  --color-yellow-30: #fff2b2;
+  --color-yellow-40: #ffed91;
+  --color-yellow-60: #c5b666;
+  --color-yellow-70: #a89a53;
+  --color-yellow-100: #504922;
+  --color-grey-40: #d3d3d3;
+  --color-grey-70: #8f8e8e;
+
+  /* Spacing */
+  --spacing-xs: 12px;
+  --spacing-s: 20px;
+  --spacing-m: 40px;
+  --spacing-l: 60px;
+  --spacing-h-padding: 50px;
+  --spacing-v-padding: 20px;
+
+  /* Border radius */
+  --radius-pill: 999px;
+  --radius-card: 14px;
+
+  /* Font families */
+  --font-bagel: var(--font-bagel-loaded), "Bagel Fat One", system-ui, sans-serif;
+  --font-melodrame: "relationship of melodrame", cursive;
+  --font-xstitch: "Kingthings Xstitch", cursive;
+  --font-arial-narrow: "Arial Narrow", Arial, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+  font-family: "relationship of melodrame";
+  src: url("/fonts/melodrame.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "Kingthings Xstitch";
+  src: url("/fonts/kingthings-xstitch.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-yellow-30);
+  color: var(--color-brown-100);
 }
+
+/* Custom cursor — uncomment in Step 7 */
+/* * { cursor: none !important; } */
