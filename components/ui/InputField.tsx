@@ -68,11 +68,12 @@ export default function InputField({
           placeholder=""
         />
       </div>
-      {state === "error" && errorMessage && (
-        <p className="mt-2 font-xstitch text-[20px] text-red-500">
-          {errorMessage}
-        </p>
-      )}
+      <p
+        className="font-xstitch text-[20px] text-red-500 mt-2"
+        style={{ visibility: state === "error" && errorMessage ? "visible" : "hidden" }}
+      >
+        {errorMessage ?? "placeholder"}
+      </p>
     </div>
   );
 }

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+*, *::before, *::after {
+  cursor: none !important;
+}
+
 @theme {
   /* Colours */
   --color-brown-100: #441e1a;

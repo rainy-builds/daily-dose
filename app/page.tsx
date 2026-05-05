@@ -12,17 +12,35 @@ function countWords(text: string): number {
   return text.trim().split(/\s+/).filter((w) => w.length > 0).length;
 }
 
+function hasLongWord(text: string): boolean {
+  return text.trim().split(/\s+/).some((w) => w.length > 25);
+}
+
+type ErrorReason = "empty" | "tooMany" | "noSpaces" | null;
+
+function deriveErrorReason(value: string, hasTriedSubmit: boolean): ErrorReason {
+  if (!value.trim() && hasTriedSubmit) return "empty";
+  if (value && hasLongWord(value)) return "noSpaces";
+  if (value && countWords(value) > 3) return "tooMany";
+  return null;
+}
+
 function deriveInputState(
   value: string,
   isFocused: boolean,
   hasTriedSubmit: boolean
 ): InputState {
-  if (!value.trim() && hasTriedSubmit) return "error";
-  if (value && countWords(value) > 3) return "error";
+  if (deriveErrorReason(value, hasTriedSubmit)) return "error";
   if (value && countWords(value) >= 1 && countWords(value) <= 3) return "success";
   if (isFocused || value) return "typing";
   return "default";
 }
+
+const ERROR_MESSAGES: Record<NonNullable<ErrorReason>, string> = {
+  empty:    "Please enter 1–3 words",
+  tooMany:  "Please enter 1–3 words (you entered too many)",
+  noSpaces: "Looks like you forgot spaces — try separating your words",
+};
 
 export default function HomePage() {
   const router = useRouter();
@@ -30,12 +48,12 @@ export default function HomePage() {
   const [isFocused, setIsFocused] = useState(false);
   const [hasTriedSubmit, setHasTriedSubmit] = useState(false);
 
+  const errorReason = deriveErrorReason(words, hasTriedSubmit);
   const inputState = deriveInputState(words, isFocused, hasTriedSubmit);
   const wordCount = countWords(words);
-  const isValid = wordCount >= 1 && wordCount <= 3;
+  const isValid = wordCount >= 1 && wordCount <= 3 && !hasLongWord(words);
 
-  const errorMessage =
-    !words.trim() ? "Please enter 1–3 words" : "Please enter 1–3 words (you entered too many)";
+  const errorMessage = errorReason ? ERROR_MESSAGES[errorReason] : undefined;
 
   function handleSubmit() {
     setHasTriedSubmit(true);

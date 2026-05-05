@@ -173,7 +173,46 @@ Full image library schema and entries: see `src/lib/imageLibrary.ts`.
 2. Home page ✅
 3. Loading screen ✅
 4. API ✅
-5. Affirmation page ← IN PROGRESS
-6. Wire flow
-7. Cursor
+5. Affirmation page ✅
+6. Wire flow ✅
+7. Cursor ← IN PROGRESS (basic default/hover done; select/sparkle state skipped)
 8. Polish
+
+---
+
+## Step 8 — Polish Checklist
+
+Simple polish pass based on best practices. Do these in order.
+
+### 8.1 Favicon
+- Copy `/public/icons/coffee/Icon = Coffee, Size = Small.png` → `app/icon.png`
+- Next.js App Router picks it up automatically as the favicon
+
+### 8.2 Page fade-in
+- Add `@keyframes fadeIn` to `globals.css`: `opacity 0→1, translateY 8px→0, duration 0.3s ease-out`
+- Apply to all `<main>` elements via a CSS rule
+
+### 8.3 Button press feedback
+- Add `active:scale-[0.97] transition-transform` to both `PrimaryButton` and `SecondaryButton`
+- Disabled state should not scale — ensure `disabled:active:scale-100` or use JS guard
+
+### 8.4 Keyboard focus styles
+- Add to `globals.css`: `:focus-visible { outline: 3px solid var(--color-yellow-70); outline-offset: 3px; border-radius: var(--radius-card); }`
+- Remove default browser outline where focus-visible is applied
+
+### 8.5 Generating page text scale
+- Scale text to match home page 80% treatment
+- Brand label: `text-[40px]`, H1: `text-[64px]` (same as home)
+- Error state text: same scale
+
+### 8.6 Error state UX
+- Add a "Try again" button on the generating error screen that calls `router.push("/")`
+- Keep the 5s auto-redirect as fallback but don't make it the only option
+
+### 8.7 Globals.css cleanup
+- Remove the orphaned `/* Custom cursor — uncomment in Step 7 */` comment block at bottom
+- Merge the two `*, *::before, *::after` blocks into one (cursor:none + box-sizing)
+
+### 8.8 Open Graph meta
+- Add to `layout.tsx` metadata: `openGraph: { title, description, type: 'website' }`
+- Optional: add a static OG image (`app/opengraph-image.png`) using the affirmation card visual
