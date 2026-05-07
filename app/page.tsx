@@ -85,7 +85,7 @@ export default function HomePage() {
             </p>
             <TypewriterText
               text="How are you feeling today?"
-              className="font-bagel text-[36px] sm:text-[64px] leading-tight text-center min-h-[90px] sm:min-h-[160px]"
+              className="font-bagel text-[36px] sm:text-[64px] leading-tight text-center min-h-[90px] sm:min-h-[80px]"
             />
           </div>
 

@@ -1,0 +1,18 @@
+<svg width="58" height="68" viewBox="0 0 58 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Thumb (squished slightly) -->
+  <ellipse cx="7" cy="44" rx="6.5" ry="8" fill="#4DCECE" stroke="#1A6B6B" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Ring finger (shorter) -->
+  <rect x="40" y="16" width="13" height="28" rx="6.5" fill="#4DCECE" stroke="#1A6B6B" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Middle finger (shorter) -->
+  <rect x="24" y="10" width="14" height="32" rx="7" fill="#4DCECE" stroke="#1A6B6B" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Index finger (shorter) -->
+  <rect x="9" y="15" width="13" height="28" rx="6.5" fill="#4DCECE" stroke="#1A6B6B" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Palm (wider, squished) -->
+  <rect x="4" y="36" width="50" height="24" rx="12" fill="#4DCECE" stroke="#1A6B6B" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Knuckle dimples -->
+  <circle cx="15.5" cy="32" r="1.8" fill="#1A6B6B" opacity="0.25"/>
+  <circle cx="31" cy="26" r="1.8" fill="#1A6B6B" opacity="0.25"/>
+  <circle cx="46.5" cy="32" r="1.8" fill="#1A6B6B" opacity="0.25"/>
+  <!-- Shadow ellipse beneath (squish effect) -->
+  <ellipse cx="29" cy="63" rx="24" ry="4" fill="#1A6B6B" opacity="0.12"/>
+</svg>
