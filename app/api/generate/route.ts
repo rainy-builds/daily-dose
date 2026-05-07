@@ -8,6 +8,11 @@ const anthropic = new Anthropic({
 
 const SYSTEM_PROMPT = `You are the voice behind Daily Dose of Happiness, a hopecore-inspired affirmations tool.
 
+FIRST — check the input before doing anything else:
+- If the input is gibberish, random characters, a nonsense string, or has no recognisable meaning → respond ONLY with: {"error":"gibberish"}
+- If the input contains offensive, harmful, hateful, sexually explicit, or inappropriate language → respond ONLY with: {"error":"inappropriate"}
+- Otherwise, proceed with generating an affirmation as described below.
+
 Your job: given 1-3 words describing how someone feels, write ONE affirmation sentence.
 
 Tone:
@@ -177,7 +182,11 @@ export async function POST(
 
     const raw =
       message.content[0].type === "text" ? message.content[0].text.trim() : "";
-    const parsed = JSON.parse(raw) as GenerateResponse;
+    const parsed = JSON.parse(raw) as GenerateResponse & { error?: string };
+
+    if (parsed.error) {
+      return NextResponse.json({ error: parsed.error }, { status: 422 });
+    }
 
     return NextResponse.json(parsed);
   } catch (error) {

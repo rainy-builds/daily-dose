@@ -6,6 +6,8 @@ export type TextColour = "black" | "white" | "white+outline";
 
 export type GenerateMode = "word" | "surprise";
 
+export type InvalidInputReason = "gibberish" | "inappropriate";
+
 export interface AffirmationCardProps {
   affirmation: string;
   imageFile: string;

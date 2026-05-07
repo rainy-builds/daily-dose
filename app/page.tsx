@@ -58,10 +58,12 @@ export default function HomePage() {
   function handleSubmit() {
     setHasTriedSubmit(true);
     if (!isValid) return;
+    sessionStorage.setItem("generating-intent", "1");
     router.push(`/generating?words=${encodeURIComponent(words.trim())}&mode=word`);
   }
 
   function handleSurprise() {
+    sessionStorage.setItem("generating-intent", "1");
     router.push("/generating?mode=surprise");
   }
 

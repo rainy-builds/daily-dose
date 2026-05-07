@@ -3,16 +3,22 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import CoffeeLoader from "@/components/affirmation/CoffeeLoader";
-import type { GenerateRequest, GenerateResponse } from "@/lib/types";
+import type { GenerateRequest, GenerateResponse, InvalidInputReason } from "@/lib/types";
 import { getImageEntry } from "@/lib/imageLibrary";
 import { Suspense } from "react";
 
 function GeneratingContent() {
   const router = useRouter();
   const params = useSearchParams();
-  const [hasError, setHasError] = useState(false);
+  const [errorType, setErrorType] = useState<"api" | InvalidInputReason | null>(null);
 
   useEffect(() => {
+    const hasIntent = sessionStorage.getItem("generating-intent");
+    if (!hasIntent) {
+      router.replace("/");
+      return;
+    }
+
     const controller = new AbortController();
     const words = params.get("words") ?? undefined;
     const mode = (params.get("mode") ?? "word") as GenerateRequest["mode"];
@@ -25,11 +31,19 @@ function GeneratingContent() {
       body: JSON.stringify(body),
       signal: controller.signal,
     })
-      .then((res) => {
+      .then(async (res) => {
+        if (res.status === 422) {
+          const body = await res.json() as { error: string };
+          sessionStorage.removeItem("generating-intent");
+          setErrorType(body.error === "inappropriate" ? "inappropriate" : "gibberish");
+          return null;
+        }
         if (!res.ok) throw new Error("API error");
         return res.json() as Promise<GenerateResponse>;
       })
       .then((data) => {
+        if (!data) return;
+        sessionStorage.removeItem("generating-intent");
         const image = getImageEntry(data.imageTag);
         router.replace(
           `/affirmation?affirmation=${encodeURIComponent(data.affirmation)}&imageTag=${data.imageTag}&imageFile=${encodeURIComponent(image.file)}`
@@ -37,27 +51,36 @@ function GeneratingContent() {
       })
       .catch((err) => {
         if (err.name === "AbortError") return;
-        setHasError(true);
+        sessionStorage.removeItem("generating-intent");
+        setErrorType("api");
         setTimeout(() => router.replace("/"), 5000);
       });
 
     return () => controller.abort();
   }, [router, params]);
 
-  if (hasError) {
+  if (errorType) {
+    const isInputError = errorType === "gibberish" || errorType === "inappropriate";
     return (
-      <main className="flex h-full flex-col items-center justify-center gap-s bg-yellow-30 px-h-padding py-v-padding">
-        <div className="flex flex-col items-center text-center text-brown-100">
-          <p className="font-melodrame text-[50px] leading-none">
-            oops.
-          </p>
-          <p className="font-bagel text-[80px] leading-tight">
-            something went wrong.
-          </p>
+      <main className="flex h-full flex-col items-center justify-center bg-yellow-30 px-h-padding py-v-padding">
+        <div className="flex flex-col items-center text-center gap-m">
+          <div className="flex flex-col items-center gap-[14px]">
+            <p className="font-bagel text-[50px] text-brown-100 leading-none">OOPS!</p>
+            <p className="font-arial-narrow text-[26px] text-black leading-normal max-w-[931px]">
+              {isInputError
+                ? "We couldn't make sense of that - try different words that describe how you feel."
+                : "Something went wrong — heading back home."}
+            </p>
+          </div>
+          {isInputError && (
+            <button
+              onClick={() => router.replace("/")}
+              className="font-bagel text-[32px] text-yellow-10 bg-[#884c46] px-h-padding py-v-padding rounded-pill hover:opacity-80 transition-opacity"
+            >
+              Try again
+            </button>
+          )}
         </div>
-        <p className="font-arial-narrow text-[24px] text-brown-100 opacity-60">
-          heading back home...
-        </p>
       </main>
     );
   }

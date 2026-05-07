@@ -6,13 +6,13 @@
 | BUG-02 | Surprise Me! repeats same card | Low | 🔴 Open | Random selection in `getImageEntry` can return same variant as previous run. No dedup logic |
 | BUG-03 | Error border lost on hover | Low | ✅ Fixed | Error state takes priority in activeBorderClass ternary — confirmed not reproducible 2026-05-05 |
 | BUG-04 | Very long single word causes 404 | Medium | ✅ Fixed | Words >25 chars now trigger "noSpaces" error state with message "Looks like you forgot spaces". Blocks submission. Fixed 2026-05-05 |
-| BUG-05 | Inappropriate single-word input reaches Claude | High | 🔴 Open | No pre-flight filter — clearly harmful words sent directly to Claude API |
-| BUG-06 | Mixed input generates inappropriate affirmation | High | 🔴 Open | 2 normal words + 1 harmful word — Claude may generate content that references the harmful word |
+| BUG-05 | Inappropriate single-word input reaches Claude | High | ✅ Fixed | Resolved by BUG-11 fix — Claude now returns {"error":"inappropriate"} for harmful input, generating page shows specific message |
+| BUG-06 | Mixed input generates inappropriate affirmation | High | ✅ Fixed | Resolved by BUG-11 fix — Claude checks input before generating |
 | BUG-07 | Double-click fires duplicate API calls | Medium | ⚠️ Masked | AbortController cancels the first call on nav, but underlying issue (no debounce/disabled state on submit) remains. See I1, I7 in e2e-flow.md |
-| BUG-08 | Refresh on /generating re-triggers API | Medium | 🔴 Open | React Strict Mode + useEffect — refreshing the generating page fires a new Claude API call |
+| BUG-08 | Refresh on /generating re-triggers API | Medium | ✅ Fixed | sessionStorage flag set before navigation; cleared on load. Refresh has no flag → redirects home. Fixed 2026-05-07 |
 | BUG-09 | Image changes on affirmation page refresh | High | ✅ Fixed | Fixed 2026-05-05 — generating page now resolves image file before navigating; affirmation page uses `getImageEntryByFile` |
 | BUG-10 | Buttons shift when input error appears | Low | ✅ Fixed | Always render `<p>` with `visibility` toggle — element stays in DOM, space always reserved. Fixed 2026-05-05 |
-| BUG-11 | No pre-flight input validation before Claude API | High | 🔴 Open | Words are sent to Claude without checking if they're meaningful or appropriate. Should validate server-side before calling Claude and return a user-facing error if input is gibberish or violates content policy |
+| BUG-11 | No pre-flight input validation before Claude API | High | ✅ Fixed | System prompt now instructs Claude to return {"error":"gibberish"} or {"error":"inappropriate"} before generating. API returns 422, generating page shows specific message + Try again button. Fixed 2026-05-07 |
 
 ---
 

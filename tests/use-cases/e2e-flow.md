@@ -6,13 +6,13 @@ Two paths: **Word** (user types feelings) and **Surprise** (random generation).
 
 | UC | Path | Description | Status | Date tested |
 |---|---|---|---|---|
-| UC-F1 | Word | Full word path happy flow | ⬜ Not tested | |
-| UC-F2 | Surprise | Full surprise path happy flow | ⬜ Not tested | |
-| UC-F3 | Word | Loading screen never skipped | ⬜ Not tested | |
-| UC-F4 | Surprise | Loading screen never skipped | ⬜ Not tested | |
-| UC-F5 | Both | Home button returns clean home page | ⬜ Not tested | |
-| UC-F6 | Both | Browser back from affirmation page | ⬜ Not tested | |
-| UC-F7 | Both | Browser back from generating page | ⬜ Not tested | |
+| UC-F1 | Word | Full word path happy flow | ✅ Pass | 2026-05-07 |
+| UC-F2 | Surprise | Full surprise path happy flow | ✅ Pass | 2026-05-07 |
+| UC-F3 | Word | Loading screen never skipped | ✅ Pass | 2026-05-07 |
+| UC-F4 | Surprise | Loading screen never skipped | ✅ Pass | 2026-05-07 |
+| UC-F5 | Both | Home button returns clean home page | ✅ Pass | 2026-05-07 |
+| UC-F6 | Both | Browser back from affirmation page | ✅ Pass | 2026-05-07 |
+| UC-F7 | Both | Browser back from generating page | ✅ Pass | 2026-05-07 |
 
 ---
 
