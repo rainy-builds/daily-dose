@@ -31,6 +31,7 @@ export default function InputField({
   errorMessage,
 }: InputFieldProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const activeBorderClass =
     state === "error" ? "border-2 border-red-500"
@@ -43,19 +44,30 @@ export default function InputField({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={`
-          flex h-[83px] w-full items-center justify-between
+          relative flex h-[83px] w-full items-center justify-between
           rounded-pill bg-yellow-10
           pl-[30px] pr-[24px] py-[8px]
           transition-colors overflow-visible
           ${activeBorderClass}
         `}
       >
+        {isFocused && !value && (
+          <div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+            aria-hidden
+          >
+            <div
+              className="w-[3px] h-[44px] bg-brown-100 rounded-full"
+              style={{ animation: 'caretBlink 1s step-start infinite' }}
+            />
+          </div>
+        )}
         <input
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={() => { setIsFocused(true); onFocus?.(); }}
+          onBlur={() => { setIsFocused(false); onBlur?.(); }}
           onKeyDown={(e) => { if (e.key === "Enter") onEnter?.(); }}
           aria-invalid={state === "error"}
           className="
@@ -64,7 +76,10 @@ export default function InputField({
             text-brown-100 outline-none text-center
             placeholder:text-yellow-60
           "
-          style={{ textIndent: '8px' }}
+          style={{
+            textIndent: '8px',
+            caretColor: isFocused && !value ? 'transparent' : undefined,
+          }}
           placeholder=""
         />
       </div>

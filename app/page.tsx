@@ -47,6 +47,7 @@ export default function HomePage() {
   const [words, setWords] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [hasTriedSubmit, setHasTriedSubmit] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const errorReason = deriveErrorReason(words, hasTriedSubmit);
   const inputState = deriveInputState(words, isFocused, hasTriedSubmit);
@@ -57,12 +58,15 @@ export default function HomePage() {
 
   function handleSubmit() {
     setHasTriedSubmit(true);
-    if (!isValid) return;
+    if (!isValid || isNavigating) return;
+    setIsNavigating(true);
     sessionStorage.setItem("generating-intent", "1");
     router.push(`/generating?words=${encodeURIComponent(words.trim())}&mode=word`);
   }
 
   function handleSurprise() {
+    if (isNavigating) return;
+    setIsNavigating(true);
     sessionStorage.setItem("generating-intent", "1");
     router.push("/generating?mode=surprise");
   }
@@ -104,10 +108,10 @@ export default function HomePage() {
 
         {/* Buttons */}
         <div className="flex items-center gap-[34px]">
-          <SecondaryButton onClick={handleSurprise}>
+          <SecondaryButton onClick={handleSurprise} disabled={isNavigating}>
             Surprise Me!
           </SecondaryButton>
-          <PrimaryButton onClick={handleSubmit} disabled={!words.trim()}>
+          <PrimaryButton onClick={handleSubmit} disabled={!words.trim() || isNavigating}>
             Lock it in!
           </PrimaryButton>
         </div>

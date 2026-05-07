@@ -2,13 +2,13 @@
 
 | ID | Title | Severity | Status | Notes |
 |---|---|---|---|---|
-| BUG-01 | Flash of previous image on navigation | Medium | 🔴 Open | Router cache shows old affirmation image briefly before new one loads. Fix: add `loading.tsx` for the affirmation route |
-| BUG-02 | Surprise Me! repeats same card | Low | 🔴 Open | Random selection in `getImageEntry` can return same variant as previous run. No dedup logic |
+| BUG-01 | Flash of previous image on navigation | Medium | ✅ Fixed | Added `app/affirmation/loading.tsx` — shows generating screen while new affirmation loads. Fixed 2026-05-07 |
+| BUG-02 | Surprise Me! repeats same card | Low | ✅ Fixed | `last-image-file` stored in sessionStorage; generating page re-rolls once if same variant returned. Fixed 2026-05-07 |
 | BUG-03 | Error border lost on hover | Low | ✅ Fixed | Error state takes priority in activeBorderClass ternary — confirmed not reproducible 2026-05-05 |
 | BUG-04 | Very long single word causes 404 | Medium | ✅ Fixed | Words >25 chars now trigger "noSpaces" error state with message "Looks like you forgot spaces". Blocks submission. Fixed 2026-05-05 |
 | BUG-05 | Inappropriate single-word input reaches Claude | High | ✅ Fixed | Resolved by BUG-11 fix — Claude now returns {"error":"inappropriate"} for harmful input, generating page shows specific message |
 | BUG-06 | Mixed input generates inappropriate affirmation | High | ✅ Fixed | Resolved by BUG-11 fix — Claude checks input before generating |
-| BUG-07 | Double-click fires duplicate API calls | Medium | ⚠️ Masked | AbortController cancels the first call on nav, but underlying issue (no debounce/disabled state on submit) remains. See I1, I7 in e2e-flow.md |
+| BUG-07 | Double-click fires duplicate API calls | Medium | ✅ Fixed | `isNavigating` state disables both buttons after first click. Fixed 2026-05-07 |
 | BUG-08 | Refresh on /generating re-triggers API | Medium | ✅ Fixed | sessionStorage flag set before navigation; cleared on load. Refresh has no flag → redirects home. Fixed 2026-05-07 |
 | BUG-09 | Image changes on affirmation page refresh | High | ✅ Fixed | Fixed 2026-05-05 — generating page now resolves image file before navigating; affirmation page uses `getImageEntryByFile` |
 | BUG-10 | Buttons shift when input error appears | Low | ✅ Fixed | Always render `<p>` with `visibility` toggle — element stays in DOM, space always reserved. Fixed 2026-05-05 |

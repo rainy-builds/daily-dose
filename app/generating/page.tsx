@@ -44,7 +44,13 @@ function GeneratingContent() {
       .then((data) => {
         if (!data) return;
         sessionStorage.removeItem("generating-intent");
-        const image = getImageEntry(data.imageTag);
+        const lastFile = sessionStorage.getItem("last-image-file");
+        let image = getImageEntry(data.imageTag);
+        if (image.file === lastFile) {
+          const retry = getImageEntry(data.imageTag);
+          if (retry.file !== lastFile) image = retry;
+        }
+        sessionStorage.setItem("last-image-file", image.file);
         router.replace(
           `/affirmation?affirmation=${encodeURIComponent(data.affirmation)}&imageTag=${data.imageTag}&imageFile=${encodeURIComponent(image.file)}`
         );
