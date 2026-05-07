@@ -10,16 +10,16 @@ export default function ResultsHeader() {
       <button
         onClick={() => router.push("/")}
         aria-label="Go home"
-        className="flex items-center gap-[26px] hover:opacity-70 transition-opacity"
+        className="flex items-center gap-[14px] sm:gap-[26px] hover:opacity-70 transition-opacity"
       >
         <Image
           src="/icons/coffee/Icon = Coffee, Size = Small.png"
           alt=""
           width={84}
           height={67}
-          className="shrink-0 drop-shadow-[0px_4px_2px_rgba(0,0,0,0.25)]"
+          className="shrink-0 drop-shadow-[0px_4px_2px_rgba(0,0,0,0.25)] w-[48px] sm:w-[84px] h-auto"
         />
-        <p className="font-melodrame text-[40px] text-brown-100 leading-none whitespace-nowrap">
+        <p className="font-melodrame text-[22px] sm:text-[40px] text-brown-100 leading-none">
           Daily Dose of Happiness
         </p>
       </button>

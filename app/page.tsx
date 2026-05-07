@@ -72,26 +72,26 @@ export default function HomePage() {
   }
 
   return (
-    <main className="flex h-full items-center justify-center bg-yellow-30 px-h-padding py-v-padding">
-      <div className="flex w-full max-w-[973px] flex-col items-center gap-m">
+    <main className="flex h-full items-center justify-center bg-yellow-30 px-[20px] sm:px-h-padding py-v-padding">
+      <div className="flex w-full max-w-[973px] flex-col items-center gap-[20px] sm:gap-m">
 
         {/* Title section */}
-        <div className="flex w-full flex-col items-center gap-l">
+        <div className="flex w-full flex-col items-center gap-[20px] sm:gap-l">
 
           {/* Brand + H1 */}
           <div className="flex flex-col items-center text-center text-brown-100">
-            <p className="font-melodrame text-[40px] leading-none">
+            <p className="font-melodrame text-[22px] sm:text-[40px] leading-none">
               Daily Dose of Happiness
             </p>
             <TypewriterText
               text="How are you feeling today?"
-              className="font-bagel text-[64px] leading-tight"
+              className="font-bagel text-[36px] sm:text-[64px] leading-tight text-center min-h-[90px] sm:min-h-[160px]"
             />
           </div>
 
           {/* Subtext + Input */}
-          <div className="flex w-full flex-col items-center gap-[25px]">
-            <p className="font-xstitch text-[24px] text-center text-black">
+          <div className="flex w-full flex-col items-center gap-[14px] sm:gap-[25px]">
+            <p className="font-xstitch text-[15px] sm:text-[24px] text-center text-black">
               Type 1-3 words below that summarises how you feel:
             </p>
             <InputField
@@ -107,7 +107,7 @@ export default function HomePage() {
         </div>
 
         {/* Buttons */}
-        <div className="flex items-center gap-[34px]">
+        <div className="flex flex-wrap items-center justify-center gap-[16px] sm:gap-[34px]">
           <SecondaryButton onClick={handleSurprise} disabled={isNavigating}>
             Surprise Me!
           </SecondaryButton>

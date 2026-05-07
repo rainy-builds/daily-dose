@@ -68,11 +68,11 @@ function GeneratingContent() {
   if (errorType) {
     const isInputError = errorType === "gibberish" || errorType === "inappropriate";
     return (
-      <main className="flex h-full flex-col items-center justify-center bg-yellow-30 px-h-padding py-v-padding">
+      <main className="flex h-full flex-col items-center justify-center bg-yellow-30 px-[20px] sm:px-h-padding py-v-padding">
         <div className="flex flex-col items-center text-center gap-m">
           <div className="flex flex-col items-center gap-[14px]">
-            <p className="font-bagel text-[50px] text-brown-100 leading-none">OOPS!</p>
-            <p className="font-arial-narrow text-[26px] text-black leading-normal max-w-[931px]">
+            <p className="font-bagel text-[36px] sm:text-[50px] text-brown-100 leading-none">OOPS!</p>
+            <p className="font-arial-narrow text-[18px] sm:text-[26px] text-black leading-normal max-w-[931px]">
               {isInputError
                 ? "We couldn't make sense of that - try different words that describe how you feel."
                 : "Something went wrong — heading back home."}
@@ -81,7 +81,7 @@ function GeneratingContent() {
           {isInputError && (
             <button
               onClick={() => router.replace("/")}
-              className="font-bagel text-[32px] text-yellow-10 bg-[#884c46] px-h-padding py-v-padding rounded-pill hover:opacity-80 transition-opacity"
+              className="font-bagel text-[18px] sm:text-[32px] text-yellow-10 bg-[#884c46] px-[20px] sm:px-h-padding py-[10px] sm:py-v-padding rounded-pill hover:opacity-80 transition-opacity"
             >
               Try again
             </button>
@@ -92,13 +92,13 @@ function GeneratingContent() {
   }
 
   return (
-    <main className="flex h-full flex-col items-center justify-center gap-m bg-yellow-30 px-h-padding py-v-padding">
+    <main className="flex h-full flex-col items-center justify-center gap-m bg-yellow-30 px-[20px] sm:px-h-padding py-v-padding">
       {/* Title */}
       <div className="flex flex-col items-center text-center text-brown-100">
-        <p className="font-melodrame text-[40px] leading-none">
+        <p className="font-melodrame text-[22px] sm:text-[40px] leading-none">
           Daily Dose of Happiness
         </p>
-        <p className="font-bagel text-[64px] leading-tight">
+        <p className="font-bagel text-[36px] sm:text-[64px] leading-tight">
           Affirmations Generating...
         </p>
       </div>

@@ -23,7 +23,7 @@ export default async function AffirmationPage({
     image.textColour === "white+outline" ? image.accentColour : undefined;
 
   return (
-    <main className="flex h-full flex-col items-center bg-yellow-30 px-[79px] pt-[61px] pb-[61px] gap-[60px]">
+    <main className="flex h-full flex-col items-center bg-yellow-30 px-[20px] sm:px-[79px] pt-[40px] sm:pt-[40px] pb-[24px] sm:pb-[40px] gap-[20px] sm:gap-[40px]">
       <ResultsHeader />
       <div className="flex flex-1 min-h-0 w-full items-center justify-center">
       <AffirmationCard

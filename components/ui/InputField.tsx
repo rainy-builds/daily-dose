@@ -44,9 +44,9 @@ export default function InputField({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={`
-          relative flex h-[83px] w-full items-center justify-between
+          relative flex h-[56px] sm:h-[83px] w-full items-center justify-between
           rounded-pill bg-yellow-10
-          pl-[30px] pr-[24px] py-[8px]
+          pl-[20px] sm:pl-[30px] pr-[16px] sm:pr-[24px] py-[8px]
           transition-colors overflow-visible
           ${activeBorderClass}
         `}
@@ -57,7 +57,7 @@ export default function InputField({
             aria-hidden
           >
             <div
-              className="w-[3px] h-[44px] bg-brown-100 rounded-full"
+              className="w-[3px] h-[28px] sm:h-[44px] bg-brown-100 rounded-full"
               style={{ animation: 'caretBlink 1s step-start infinite' }}
             />
           </div>
@@ -72,7 +72,7 @@ export default function InputField({
           aria-invalid={state === "error"}
           className="
             w-full bg-transparent
-            font-melodrame text-[40px] leading-none
+            font-melodrame text-[22px] sm:text-[40px] leading-none
             text-brown-100 outline-none text-center
             placeholder:text-yellow-60
           "
@@ -84,7 +84,7 @@ export default function InputField({
         />
       </div>
       <p
-        className="font-xstitch text-[20px] text-red-500 mt-2"
+        className="font-xstitch text-[13px] sm:text-[20px] text-red-500 mt-2"
         style={{ visibility: state === "error" && errorMessage ? "visible" : "hidden" }}
       >
         {errorMessage ?? "placeholder"}

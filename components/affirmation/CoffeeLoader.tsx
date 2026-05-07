@@ -24,6 +24,7 @@ export default function CoffeeLoader() {
       alt="Loading…"
       width={220}
       height={220}
+      className="w-[120px] sm:w-[220px] h-auto"
       style={{ objectFit: "contain" }}
     />
   );
