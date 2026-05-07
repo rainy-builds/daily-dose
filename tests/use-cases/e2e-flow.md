@@ -118,9 +118,9 @@ Two paths: **Word** (user types feelings) and **Surprise** (random generation).
 
 | textColour | Confirmed? | Example tag | URL to force it | Notes |
 |---|---|---|---|---|
-| `black` | ⬜ | `food-macro` | `/affirmation?affirmation=i+love+matcha&imageTag=food-macro` | |
-| `white` | ⬜ | `dark-artwork` | `/affirmation?affirmation=you+are+enough&imageTag=dark-artwork` | |
-| `white+outline` | ⬜ | `cosy-object` | `/affirmation?affirmation=sometimes+all+you+need+is+tea&imageTag=cosy-object` | |
+| `black` | ✅ | `food-macro` | `/affirmation?affirmation=i+love+matcha&imageTag=food-macro` | |
+| `white` | ✅ | `dark-artwork` | `/affirmation?affirmation=you+are+enough&imageTag=dark-artwork` | |
+| `white+outline` | ✅ | `cosy-object` | `/affirmation?affirmation=sometimes+all+you+need+is+tea&imageTag=cosy-object` | |
 
 **Pass criteria for each row:**
 - Text is legible against the image at a glance
@@ -137,9 +137,9 @@ Use the URLs below to test each case directly:
 
 | Input | Position | Colour | URL | Text overflow? | Text clipped? | Status | Notes |
 |---|---|---|---|---|---|---|---|
-| overwhelmed by everything | middle | black | `/affirmation?affirmation=overwhelmed+by+everything&imageTag=food-macro` | ⬜ | ⬜ | ⬜ Not tested | |
-| scared about the future | top | white | `/affirmation?affirmation=scared+about+the+future&imageTag=dark-artwork` | ⬜ | ⬜ | ⬜ Not tested | |
-| feeling lost and unlovable | middle | white+outline | `/affirmation?affirmation=feeling+lost+and+unlovable&imageTag=cosy-object` | ⬜ | ⬜ | ⬜ Not tested | |
+| overwhelmed by everything | middle | black | `/affirmation?affirmation=overwhelmed+by+everything&imageTag=food-macro` | ✅ | ✅ | ✅ Pass | 2026-05-07 |
+| scared about the future | top | white | `/affirmation?affirmation=scared+about+the+future&imageTag=dark-artwork` | ✅ | ✅ | ✅ Pass | 2026-05-07 |
+| feeling lost and unlovable | middle | white+outline | `/affirmation?affirmation=feeling+lost+and+unlovable&imageTag=cosy-object` | ✅ | ✅ | ✅ Pass | 2026-05-07 |
 
 **Note:** These inputs test the real Claude output — the affirmation text returned will be longer than the input. If you want to test a specific long string directly, use:
 `/affirmation?affirmation=the+day+you+plant+the+seed+is+not+the+day+you+eat+the+fruit&imageTag=garden-closeup`
@@ -156,17 +156,17 @@ Use the URLs below to test each case directly:
 
 | # | Test case | Steps | Expected result | Actual result | Status | Bug ID | Date tested |
 |---|---|---|---|---|---|---|---|
-| V1 | Empty submit | Click "Lock it in!" with no text entered | Button stays inactive — no submission fires | | ⬜ Not tested | | |
-| V2 | Single word | Type one word, click "Lock it in!" | Button activates, flow proceeds normally | | ⬜ Not tested | | |
-| V3 | Two words | Type two words, click "Lock it in!" | Button activates, flow proceeds normally | | ⬜ Not tested | | |
-| V4 | Three words | Type three words, click "Lock it in!" | Button activates, flow proceeds normally | | ⬜ Not tested | | |
-| V5 | Four words | Type four words, click "Lock it in!" | Inline error shown, submission blocked | | ⬜ Not tested | | |
-| V6 | Spaces only | Type spaces only, click "Lock it in!" | Treated as empty — button stays inactive | | ⬜ Not tested | | |
-| V7 | Single character | Type one letter | Button activates (counts as 1 word) | | ⬜ Not tested | | |
-| V8 | Numbers | Type a number e.g. 123 | Accepted as 1 word, flow proceeds | | ⬜ Not tested | | |
-| V9 | Very long single word | Type a 30+ character string | Accepted as 1 word, renders on card without overflow | | ⬜ Not tested | | |
-| V10 | Inappropriate content | Type a clearly harmful word | API handles gracefully — no crash, error state shown | | ⬜ Not tested | | |
-| V11 | Mixed appropriate + harmful | Two normal words + one harmful word | Same as V10 — graceful error, no crash | | ⬜ Not tested | | |
+| V1 | Empty submit | Click "Lock it in!" with no text entered | Button stays inactive — no submission fires | Pass | ✅ Pass | | 2026-05-07 |
+| V2 | Single word | Type one word, click "Lock it in!" | Button activates, flow proceeds normally | Pass | ✅ Pass | | 2026-05-07 |
+| V3 | Two words | Type two words, click "Lock it in!" | Button activates, flow proceeds normally | Pass | ✅ Pass | | 2026-05-07 |
+| V4 | Three words | Type three words, click "Lock it in!" | Button activates, flow proceeds normally | Pass | ✅ Pass | | 2026-05-07 |
+| V5 | Four words | Type four words, click "Lock it in!" | Inline error shown, submission blocked | Pass | ✅ Pass | | 2026-05-07 |
+| V6 | Spaces only | Type spaces only, click "Lock it in!" | Treated as empty — button stays inactive | Pass | ✅ Pass | | 2026-05-07 |
+| V7 | Single character | Type one letter | Button activates (counts as 1 word) | Pass | ✅ Pass | | 2026-05-07 |
+| V8 | Numbers | Type a number e.g. 123 | Accepted as 1 word, flow proceeds | Pass | ✅ Pass | | 2026-05-07 |
+| V9 | Very long single word | Type a 30+ character string | Accepted as 1 word, renders on card without overflow | Pass | ✅ Pass | | 2026-05-07 |
+| V10 | Inappropriate content | Type a clearly harmful word | API handles gracefully — no crash, error state shown | Pass | ✅ Pass | | 2026-05-07 |
+| V11 | Mixed appropriate + harmful | Two normal words + one harmful word | Same as V10 — graceful error, no crash | Pass | ✅ Pass | | 2026-05-07 |
 
 ---
 
@@ -176,8 +176,8 @@ Use the URLs below to test each case directly:
 |---|---|---|---|---|---|---|---|
 | I1 | Double-click "Lock it in!" | Click submit button twice rapidly | Only one API call fires — no duplicate submissions | Second click navigated away before call completed — AbortController cancelled it | ⚠️ Masked by AbortController | BUG-07 | 2026-05-05 |
 | I2 | Browser back from card | On affirmation card, press browser back | Handled gracefully — returns to home or appropriate state | | ⬜ Not tested | | |
-| I3 | Refresh on loading screen | Refresh browser during loading state | Returns to home page — no stuck loading state | | ⬜ Not tested | | |
-| I4 | Refresh on affirmation card | Refresh browser on final card | Card re-renders correctly — no broken state | | ⬜ Not tested | | |
+| I3 | Refresh on loading screen | Refresh browser during loading state | Returns to home page — no stuck loading state | Pass | ✅ Pass | | 2026-05-07 |
+| I4 | Refresh on affirmation card | Refresh browser on final card | Card re-renders correctly — no broken state | Pass | ✅ Pass | | 2026-05-07 |
 | I5 | Surprise Me! then Home | Use Surprise Me!, view card, click Home | Returns to clean empty home page | Pass | ✅ Pass | | 2026-05-05 |
 | I6 | Rapid repeated use | Complete full flow 5 times in a row | No degradation — each run produces a valid result | Pass | ✅ Pass | | 2026-05-05 |
 | I7 | Surprise Me! double-click | Click "Surprise Me!" twice rapidly | Only one API call fires | Same as I1 — AbortController masking the issue | ⚠️ Masked by AbortController | BUG-07 | 2026-05-05 |
@@ -189,8 +189,8 @@ Use the URLs below to test each case directly:
 
 | # | Device / size | Steps | Expected result | Actual result | Status | Bug ID | Date tested |
 |---|---|---|---|---|---|---|---|
-| D1 | Mobile portrait — iPhone / 390px | Resize browser to 390px wide, run full flow | Card layout holds, text readable, buttons tappable | | ⬜ Not tested | | |
-| D2 | Mobile landscape — iPhone / ~844px | Rotate to landscape or resize to 844px, run full flow | Layout adapts, no overflow | | ⬜ Not tested | | |
-| D3 | Tablet — iPad / ~768px | Resize to 768px, run full flow | Layout holds between mobile and desktop | | ⬜ Not tested | | |
-| D4 | Desktop — 1440px | Full browser width at 1440px | Reference layout — matches Figma exactly | | ⬜ Not tested | | |
-| D5 | Large screen — 2560px | Expand browser to 2560px | No extreme stretching or layout breaks | | ⬜ Not tested | | |
+| D1 | Mobile portrait — iPhone / 390px | Resize browser to 390px wide, run full flow | Card layout holds, text readable, buttons tappable | Pass | ✅ Pass | | 2026-05-07 |
+| D2 | Mobile landscape — iPhone / ~844px | Rotate to landscape or resize to 844px, run full flow | Layout adapts, no overflow | Pass | ✅ Pass | | 2026-05-07 |
+| D3 | Tablet — iPad / ~768px | Resize to 768px, run full flow | Layout holds between mobile and desktop | Pass | ✅ Pass | | 2026-05-07 |
+| D4 | Desktop — 1440px | Full browser width at 1440px | Reference layout — matches Figma exactly | Pass | ✅ Pass | | 2026-05-07 |
+| D5 | Large screen — 2560px | Expand browser to 2560px | No extreme stretching or layout breaks | Pass | ✅ Pass | | 2026-05-07 |
