@@ -18,8 +18,9 @@ export default function PrimaryButton({
       className={`
         flex items-center gap-xs rounded-card px-h-padding py-v-padding
         font-bagel text-[26px] transition-colors border-4
+        active:scale-[0.97] transition-transform
         ${disabled
-          ? "border-transparent bg-grey-40 text-grey-70"
+          ? "border-transparent bg-grey-40 text-grey-70 active:scale-100"
           : "border-yellow-70 bg-brown-100 text-yellow-10 hover:border-transparent"
         }
       `}

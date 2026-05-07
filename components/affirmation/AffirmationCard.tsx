@@ -52,6 +52,12 @@ export default function AffirmationCard({
           {affirmation}
         </p>
       </div>
+      <span
+        className="absolute bottom-3 left-3 font-arial-narrow text-[11px] tracking-wide text-white/70"
+        style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
+      >
+        image via Pinterest
+      </span>
     </div>
   );
 }

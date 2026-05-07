@@ -13,6 +13,11 @@ const bagelFatOne = Bagel_Fat_One({
 export const metadata: Metadata = {
   title: "Daily Dose of Happiness",
   description: "Enter 1–3 words and receive a personalised daily affirmation.",
+  openGraph: {
+    title: "Daily Dose of Happiness",
+    description: "Enter 1–3 words and receive a personalised daily affirmation.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

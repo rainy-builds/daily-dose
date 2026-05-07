@@ -20,7 +20,8 @@ export default function SecondaryButton({
         bg-yellow-20 px-h-padding py-v-padding
         font-bagel text-[26px] text-brown-200
         transition-colors hover:bg-yellow-40
-        disabled:opacity-40
+        active:scale-[0.97] transition-transform
+        disabled:opacity-40 disabled:active:scale-100
       "
     >
       {children}
