@@ -186,11 +186,10 @@ export async function POST(
     const body: { words?: string; mode?: string } = await request.json();
     const { words, mode } = body;
 
-    const userMessage =
-      mode === "surprise" || !words ? "Surprise me." : `Feeling: ${words}`;
+    const userMessage = words ? `Feeling: ${words}` : "Surprise me.";
 
     const message = await anthropic.messages.create({
-      model: "claude-sonnet-4-6",
+      model: "claude-sonnet-4-20250514",
       max_tokens: 400,
       system: SYSTEM_PROMPT,
       messages: [{ role: "user", content: userMessage }],
