@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Bagel_Fat_One } from "next/font/google";
 import "./globals.css";
-import CustomCursor from "@/components/ui/CustomCursor";
 
 const bagelFatOne = Bagel_Fat_One({
   weight: "400",
@@ -28,7 +27,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${bagelFatOne.variable} h-full`}>
       <body className="h-full">
-        <CustomCursor />
         {children}
       </body>
     </html>

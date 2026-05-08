@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 *, *::before, *::after {
-  cursor: none !important;
   box-sizing: border-box;
 }
 

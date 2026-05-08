@@ -58,7 +58,7 @@ export default function InputField({
           >
             <div
               className="w-[3px] h-[28px] sm:h-[44px] bg-brown-100 rounded-full"
-              style={{ animation: 'caretBlink 1s step-start infinite' }}
+              style={{ animation: 'caretBlink 1s step-end infinite' }}
             />
           </div>
         )}
