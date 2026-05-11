@@ -52,8 +52,9 @@ function GeneratingContent() {
           if (retry.file !== lastFile) image = retry;
         }
         sessionStorage.setItem("last-image-file", image.file);
+        const wordsParam = words ? `&words=${encodeURIComponent(words)}` : "";
         router.replace(
-          `/affirmation?affirmation=${encodeURIComponent(data.affirmation)}&imageTag=${data.imageTag}&imageFile=${encodeURIComponent(image.file)}`
+          `/affirmation?affirmation=${encodeURIComponent(data.affirmation)}&imageTag=${data.imageTag}&imageFile=${encodeURIComponent(image.file)}${wordsParam}`
         );
       })
       .catch((err) => {
