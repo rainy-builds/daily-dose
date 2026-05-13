@@ -164,9 +164,11 @@ const FALLBACK_ENTRY: TagEntry = {
   variants: [{ file: "soft-textile/soft-textile-01.jpg", textColour: "white", textPosition: "middle" }],
 };
 
-export function getImageEntry(tag: string): ImageEntry {
+export function getImageEntry(tag: string, excludeFiles: string[] = []): ImageEntry {
   const entry = LIBRARY[tag] ?? FALLBACK_ENTRY;
-  const variant = entry.variants[Math.floor(Math.random() * entry.variants.length)];
+  const available = entry.variants.filter((v) => !excludeFiles.includes(v.file));
+  const pool = available.length > 0 ? available : entry.variants;
+  const variant = pool[Math.floor(Math.random() * pool.length)];
   return {
     file: variant.file,
     fallbackColor: entry.fallbackColor,
@@ -175,6 +177,10 @@ export function getImageEntry(tag: string): ImageEntry {
     backgroundPosition: variant.backgroundPosition ?? "center",
     accentColour: variant.accentColour,
   };
+}
+
+export function getVariantCount(tag: string): number {
+  return (LIBRARY[tag] ?? FALLBACK_ENTRY).variants.length;
 }
 
 export function getImageEntryByFile(tag: string, file: string): ImageEntry {

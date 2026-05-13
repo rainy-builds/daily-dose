@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import CoffeeLoader from "@/components/affirmation/CoffeeLoader";
 import type { GenerateRequest, GenerateResponse, InvalidInputReason } from "@/lib/types";
-import { getImageEntry } from "@/lib/imageLibrary";
+import { getImageEntry, getVariantCount } from "@/lib/imageLibrary";
 import { Suspense } from "react";
 
 function GeneratingContent() {
@@ -45,13 +45,14 @@ function GeneratingContent() {
       .then((data) => {
         if (!data) return;
         sessionStorage.removeItem("generating-intent");
-        const lastFile = sessionStorage.getItem("last-image-file");
-        let image = getImageEntry(data.imageTag);
-        if (image.file === lastFile) {
-          const retry = getImageEntry(data.imageTag);
-          if (retry.file !== lastFile) image = retry;
-        }
-        sessionStorage.setItem("last-image-file", image.file);
+        const tag = data.imageTag;
+        const historyKey = `img-history:${tag}`;
+        let history: string[] = [];
+        try { history = JSON.parse(sessionStorage.getItem(historyKey) ?? "[]"); } catch {}
+        const image = getImageEntry(tag, history);
+        const maxHistory = Math.max(1, getVariantCount(tag) - 1);
+        const newHistory = [...history, image.file].slice(-maxHistory);
+        try { sessionStorage.setItem(historyKey, JSON.stringify(newHistory)); } catch {}
         const wordsParam = words ? `&words=${encodeURIComponent(words)}` : "";
         router.replace(
           `/affirmation?affirmation=${encodeURIComponent(data.affirmation)}&imageTag=${data.imageTag}&imageFile=${encodeURIComponent(image.file)}${wordsParam}`
