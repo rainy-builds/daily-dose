@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { getAllVariants } from "@/lib/imageLibrary";
 import AffirmationCard from "@/components/affirmation/AffirmationCard";
 
@@ -9,6 +10,8 @@ const W = Math.round(1197 * SCALE); // 550
 const H = Math.round(751 * SCALE);  // 345
 
 export default function PreviewPage() {
+  if (process.env.NODE_ENV === "production") notFound();
+
   const variants = getAllVariants();
 
   return (

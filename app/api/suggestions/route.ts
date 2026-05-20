@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
+import { checkRateLimit, getRequestIp } from "@/lib/rateLimit";
 
 // TODO: wire up to affirmation page UI
 
@@ -186,9 +187,24 @@ export interface SuggestionsResponse {
 export async function POST(
   request: Request
 ): Promise<NextResponse<SuggestionsResponse | { error: string }>> {
+  const { allowed, retryAfter } = checkRateLimit(getRequestIp(request));
+  if (!allowed) {
+    return NextResponse.json(
+      { error: "Too many requests" },
+      { status: 429, headers: { "Retry-After": String(retryAfter) } }
+    );
+  }
+
   try {
     const body: { words?: string; affirmation?: string; mode?: string } = await request.json();
     const { words, affirmation, mode } = body;
+
+    if (words && words.length > 200) {
+      return NextResponse.json({ error: "Input too long" }, { status: 400 });
+    }
+    if (affirmation && affirmation.length > 500) {
+      return NextResponse.json({ error: "Input too long" }, { status: 400 });
+    }
 
     const parts: string[] = [];
     if (affirmation) parts.push(`Affirmation: ${affirmation}`);

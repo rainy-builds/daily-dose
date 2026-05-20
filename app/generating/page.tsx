@@ -22,9 +22,8 @@ function GeneratingContent() {
     const controller = new AbortController();
     const words = params.get("words") ?? undefined;
     const mode = (params.get("mode") ?? "word") as GenerateRequest["mode"];
-    const mock = params.get("mock") === "true";
 
-    const body: GenerateRequest = { words, mode, ...(mock && { mock: true }) };
+    const body: GenerateRequest = { words, mode };
 
     fetch("/api/generate", {
       method: "POST",

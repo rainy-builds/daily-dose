@@ -21,7 +21,6 @@ export interface AffirmationCardProps {
 export interface GenerateRequest {
   words?: string;
   mode: GenerateMode;
-  mock?: boolean;
 }
 
 export interface GenerateResponse {

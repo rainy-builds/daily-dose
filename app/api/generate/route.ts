@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import type { GenerateRequest, GenerateResponse } from "@/lib/types";
+import { checkRateLimit, getRequestIp } from "@/lib/rateLimit";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -181,17 +182,20 @@ Feeling: small wins
 export async function POST(
   request: Request
 ): Promise<NextResponse<GenerateResponse | { error: string }>> {
+  const { allowed, retryAfter } = checkRateLimit(getRequestIp(request));
+  if (!allowed) {
+    return NextResponse.json(
+      { error: "Too many requests" },
+      { status: 429, headers: { "Retry-After": String(retryAfter) } }
+    );
+  }
+
   try {
     const body: GenerateRequest = await request.json();
     const { words, mode } = body;
 
-    if (body.mock) {
-      return NextResponse.json({
-        affirmation: "mock: this is a test affirmation to check layout and styling.",
-        imageTag: "food-macro",
-        textPosition: "middle",
-        textColour: "black",
-      } satisfies GenerateResponse);
+    if (words && words.length > 200) {
+      return NextResponse.json({ error: "Input too long" }, { status: 400 });
     }
 
     const SURPRISE_SEEDS = [
