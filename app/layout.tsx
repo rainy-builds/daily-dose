@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bagel_Fat_One } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const bagelFatOne = Bagel_Fat_One({
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="en" className={`${bagelFatOne.variable} h-full`}>
       <body className="h-full">
         {children}
+        <Analytics />
       </body>
     </html>
   );
