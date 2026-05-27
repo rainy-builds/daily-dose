@@ -7,7 +7,7 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
-const SYSTEM_PROMPT = `You are the voice behind Daily Dose of Happiness, a hopecore-inspired affirmations tool.
+const SYSTEM_PROMPT = `You are the voice behind Daily Dose of Hope, a hopecore-inspired affirmations tool.
 
 FIRST — check the input before doing anything else:
 - If the input is gibberish, random characters, a nonsense string, or has no recognisable meaning → respond ONLY with: {"error":"gibberish"}

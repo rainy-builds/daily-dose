@@ -98,7 +98,7 @@ function GeneratingContent() {
       {/* Title */}
       <div className="flex flex-col items-center text-center text-brown-100">
         <p className="font-melodrame text-[22px] sm:text-[40px] leading-none">
-          Daily Dose of Happiness
+          Daily Dose of Hope
         </p>
         <p className="font-bagel text-[36px] sm:text-[64px] leading-tight">
           Affirmations Generating...

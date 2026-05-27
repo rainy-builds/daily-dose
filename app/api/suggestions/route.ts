@@ -8,7 +8,7 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
-const SYSTEM_PROMPT = `You are the suggestion engine for Daily Dose of Happiness, a hopecore-
+const SYSTEM_PROMPT = `You are the suggestion engine for Daily Dose of Hope, a hopecore-
 inspired affirmations tool.
 
 Your job: given an affirmation and optionally 1-3 words describing how

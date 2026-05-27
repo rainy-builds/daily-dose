@@ -81,7 +81,7 @@ export default function HomePage() {
           {/* Brand + H1 */}
           <div className="flex flex-col items-center text-center text-brown-100">
             <p className="font-melodrame text-[22px] sm:text-[40px] leading-none">
-              Daily Dose of Happiness
+              Daily Dose of Hope
             </p>
             <TypewriterText
               text="How are you feeling today?"

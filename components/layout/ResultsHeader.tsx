@@ -20,7 +20,7 @@ export default function ResultsHeader() {
           className="shrink-0 drop-shadow-[0px_4px_2px_rgba(0,0,0,0.25)] w-[48px] sm:w-[84px] h-auto"
         />
         <p className="font-melodrame text-[22px] sm:text-[40px] text-brown-100 leading-none">
-          Daily Dose of Happiness
+          Daily Dose of Hope
         </p>
       </button>
     </header>

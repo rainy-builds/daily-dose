@@ -1,4 +1,4 @@
-# CLAUDE.md — Daily Dose of Happiness
+# CLAUDE.md — Daily Dose of Hope
 
 This file is read by Claude Code at the start of every session.
 Follow all rules here before writing any code.
@@ -7,7 +7,7 @@ Follow all rules here before writing any code.
 
 ## Project
 
-**App:** Daily Dose of Happiness — a web affirmations tool.  
+**App:** Daily Dose of Hope — a web affirmations tool.  
 **Figma file:** https://www.figma.com/design/dKY0QE65wPab0hxIe4Ihfp/Daily-Dose-of-Hope  
 **Stack:** Next.js 14+ (App Router), TypeScript, Tailwind CSS  
 **AI:** Claude API (`claude-sonnet-4-20250514`) — server-side only  
